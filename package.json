@@ -1,0 +1,23 @@
+{
+  "name": "study1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1013755166/wechat-study.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1013755166/wechat-study/issues"
+  },
+  "homepage": "https://github.com/1013755166/wechat-study#readme",
+  "dependencies": {
+    "@escook/request-miniprogram": "^0.2.1"
+  }
+}

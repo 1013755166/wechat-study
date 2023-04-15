@@ -1,5 +1,7 @@
 <template>
   <view>
+    <!-- 使用自定义的搜索组件 -->
+    <my-search @click="gotoSearch"></my-search>
     <view class="scroll-view-container">
       <!-- 左侧的滚动视图区域 -->
       <scroll-view class="left-scroll-view" scroll-y :style="{height: wh +'px'}">
@@ -32,7 +34,7 @@
   export default {
     data() {
       return {
-        // 窗口的可用高度=屏幕高度-navigationBar高度 - tabbar高度
+        // 窗口的可用高度=屏幕高度-navigationBar高度 - tabbar高度 - 自定义的search组件高度
         wh: 0,
         // 分类数据列表
         cateList: [],
@@ -48,7 +50,7 @@
       // 获取当前系统的信息
       const sysInfo = uni.getSystemInfoSync()
       // 为wh窗口可用高度动态赋值
-      this.wh = sysInfo.windowHeight
+      this.wh = sysInfo.windowHeight - 50
       // 获取分类数据列表
       this.getCateList()
     },
@@ -70,13 +72,21 @@
         this.active = i
         // 为二级分类列表重新赋值
         this.cateLevel2 = this.cateList[i].children
-        // 让scrollTop的值在0与1之间切换
-        this.scrollTop = this.scrollTop === 0 ? 1 : 0
+        // scrollTop变化，方法一：让scrollTop的值在0px与1px之间切换,1px之差，视觉变化很小，scrollTop赋值前后的值不能相同，不然无法重置，所以当scrollTop为0的时候，就重置成1，这样二级分类的滚动条就可以回到顶部
+        // this.scrollTop = this.scrollTop === 0 ? 1 : 0
+        // scrollTop变化,方法二：使用math.random()随机0与1之间的数
+        this.scrollTop = Math.random(1)
       },
       // 点击三级分类项跳转到商品列表页面
       gotoGoodsList(item) {
         uni.navigateTo({
           url: '/subpkg/goods_list/goods_list?cid=' + item.cat_id
+        })
+      },
+      // 跳转到分包中的搜索页面
+      gotoSearch() {
+        uni.navigateTo({
+          url: '/subpkg/search/search'
         })
       }
     }
